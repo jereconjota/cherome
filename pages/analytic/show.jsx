@@ -1,11 +1,13 @@
+import React from 'react'
 import { Layout } from '../../components/Layout'
 
-const load = () => {
+
+function show() {
   return (
     <Layout>
-      <div>load</div>
+        <div>show</div>
     </Layout>
   )
 }
 
-export default load
+export default show
