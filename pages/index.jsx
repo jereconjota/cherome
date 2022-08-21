@@ -11,6 +11,7 @@ export default function Home() {
                 <title>Cherome</title>
                 <meta name="description" content="Sistema de Alumnos del Instituto Superior de Formacion Docente" />
                 <link rel="icon" href="/img/logo802.ico" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
 
             <main className={styles.main}>
