@@ -20,7 +20,7 @@ export default function Home() {
                 </h1>
                 <Image src="/img/logo802.png" alt="logo ISFD numero 802" width={400} height={300} />
                 <Link href="/home">
-                    <a className={styles.link}>
+                    <a className="rounded-full bg-blue-100 hover:bg-blue-300 hover:text-blue-700 text-blue-500 p-4" >
                         Ir a la pagina principal
                     </a>
                 </Link>

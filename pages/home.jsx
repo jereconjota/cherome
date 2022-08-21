@@ -3,7 +3,7 @@ import { Layout } from '../components/Layout'
 function home() { 
   return (
     <Layout>
-        <div>home</div>
+        <div>En ejemplo, iniciamos sesion con el usuario Marcelo Martinelli...</div>
     </Layout>
   )
 }
