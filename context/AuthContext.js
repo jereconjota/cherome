@@ -8,7 +8,7 @@ import {
     signInWithPopup,
     sendPasswordResetEmail,
 } from "firebase/auth";
-import { auth } from "../lib/firebase";
+import { auth, getStudent } from "../utils/firebase";
 
 const authContext = createContext();
 
@@ -21,13 +21,20 @@ export const useAuth = () => {
 export function AuthProvider({ children }) {
 
     const [user, setUser] = useState(null);
+    const [userData, setUserData] = useState(null);
+
     const [loading, setLoading] = useState(true);
 
     const signup = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password);
     };
 
-    const login = (email, password) => {
+    const login = async (email, password) => {
+
+        //buscamos el usuario en firestore
+        const user = await getStudent(email);
+        setUserData(user.data());
+
         return signInWithEmailAndPassword(auth, email, password);
     };
 
@@ -42,8 +49,9 @@ export function AuthProvider({ children }) {
 
     useEffect(() => { //if user is logged in, set user to the user object, else set user to null
         const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
-            console.log({ currentUser });
+            // console.log({ currentUser });
             setUser(currentUser);
+            setUserData(null);
             setLoading(false);
         });
         return () => unsubuscribe();
@@ -59,6 +67,7 @@ export function AuthProvider({ children }) {
                 loading,
                 loginWithGoogle,
                 resetPassword,
+                userData
             }}
         >
             {children}

@@ -1,22 +1,16 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { Layout } from '../components/Layout'
-import { useAuth } from "../context/AuthContext";
-import { students } from '../utils/students';
-import { saveStudent } from '../utils/firebase';
+import { useEffect, useState } from 'react';
+import { Layout } from '../../components/Layout'; 
+import { useAuth } from '../../context/AuthContext';
 
-export default function Home() {
-    const { logout, user } = useAuth();
+
+export default function Profile() {
+    const { logout, user, userData } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
-
-        // students.forEach((student) => {
-        //     saveStudent(student)
-        // })
-
+        console.log(userData)
     }, []);
-
 
     const handleLogout = async () => {
         try {
@@ -43,3 +37,6 @@ export default function Home() {
         </Layout>
     );
 }
+
+
+

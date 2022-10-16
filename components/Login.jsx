@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
-import Link  from "next/link";
+import Link from "next/link";
 import { Alert } from "./Alert";
+import { onGetUsers, saveUser } from "../utils/firebase";
 
 export default function Login() {
     const [user, setUser] = useState({
@@ -10,7 +11,7 @@ export default function Login() {
         password: "",
     });
 
-    const { login, loginWithGoogle, resetPassword } = useAuth();
+    const { login, loginWithGoogle, resetPassword, userData } = useAuth();
     const [error, setError] = useState("");
 
     const router = useRouter();
@@ -19,8 +20,8 @@ export default function Login() {
         e.preventDefault();
         setError("");
         try {
-            await login(user.email, user.password);
-            router.push("/home");
+            const loggedUser = await login(user.email, user.password);
+            router.push("/students/" + loggedUser.user.uid);
         } catch (error) {
             setError(error.message);
         }
@@ -29,14 +30,14 @@ export default function Login() {
     const handleChange = ({ target: { value, name } }) =>
         setUser({ ...user, [name]: value });
 
-    const handleGoogleSignin = async () => {
-        try {
-            await loginWithGoogle();
-            router.push("/home");
-        } catch (error) {
-            setError(error.message);
-        }
-    };
+    // const handleGoogleSignin = async () => {
+    //     try {
+    //         await loginWithGoogle();
+    //         router.push("/home");
+    //     } catch (error) {
+    //         setError(error.message);
+    //     }
+    // };
 
     const handleResetPassword = async (e) => {
         e.preventDefault();

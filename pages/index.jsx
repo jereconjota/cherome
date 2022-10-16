@@ -15,7 +15,7 @@ export default function Home() {
 
     useEffect (() => {
         if (user) {
-            router.push('/home')
+            router.push('/students/' + user.uid)
         }
     }, [user])
 
@@ -33,8 +33,14 @@ export default function Home() {
                 <h1 className={styles.title}>
                     Bienvenido a CHEROME
                 </h1>
+                <p>Sistema de estudiantes</p>
                 <Image src="/img/logo802.png" alt="logo ISFD numero 802" width={300} height={200} />
                 <Login></Login>
+                {/* link to admin login view */}
+                <Link href="/admin">
+                    <a className={styles.admin}>Admin login</a>
+                </Link>
+
             </main>
         </div>
     )

@@ -1,10 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { getEmojiList } from '../../lib/sheets';
+import { onGetUsers, saveUser } from "../../utils/firebase";
+import { users } from '../../utils/students.js';
 
 export default async function handler(req, res) {
-  const emojis = await getEmojiList();
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify(emojis));
+  
+  //return content of users array
+  res.status(200).json('users');
   
 }
