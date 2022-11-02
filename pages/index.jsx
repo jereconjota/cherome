@@ -15,7 +15,8 @@ export default function Home() {
 
     useEffect (() => {
         if (user) {
-            router.push('/students/' + user.uid)
+            console.log('user', user)
+            router.push( '/students/[id]', `/students/${user.uid}`)
         }
     }, [user])
 
@@ -36,9 +37,10 @@ export default function Home() {
                 <p>Sistema de estudiantes</p>
                 <Image src="/img/logo802.png" alt="logo ISFD numero 802" width={300} height={200} />
                 <Login></Login>
+
                 {/* link to admin login view */}
                 <Link href="/admin">
-                    <a className={styles.admin}>Admin login</a>
+                   <a className={styles.admin}> <small>Admin login</small></a>
                 </Link>
 
             </main>

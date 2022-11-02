@@ -28,7 +28,7 @@ export default function Register() {
     };
 
     return (
-        <div className="w-full max-w-xs m-auto text-black">
+        <div className="w-full max-w-xs m-auto text-black mt-10">
             {error && <Alert message={error} />}
 
             <form

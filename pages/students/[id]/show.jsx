@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Layout } from '../../components/Layout'
-import { inicial_2022 } from '../../inicial_2022.js'
+import { Layout } from '../../../components/Layout'
+import { inicial_2022 } from '../../../inicial_2022.js'
 
 function show() {
 

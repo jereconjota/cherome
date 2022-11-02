@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { Layout } from '../components/Layout'
 import { useAuth } from "../context/AuthContext";
-import { students } from '../utils/students';
-import { saveStudent } from '../utils/firebase';
+import { users } from '../utils/students';
+import { saveStudent, updateStudent } from '../utils/firebase';
 
 export default function Home() {
     const { logout, user } = useAuth();
@@ -11,8 +11,10 @@ export default function Home() {
 
     useEffect(() => {
 
-        // students.forEach((student) => {
-        //     saveStudent(student)
+        // users.forEach((student) => {
+        //     if ( student.email === user.email ) {
+        //         updateStudent(user.uid, student);
+        //     }
         // })
 
     }, []);

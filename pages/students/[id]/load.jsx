@@ -1,5 +1,5 @@
-import { Layout } from '../../components/Layout'
-import { inicial_2022 } from '../../inicial_2022.js'
+import { Layout } from '../../../components/Layout'
+import { inicial_2022 } from '../../../inicial_2022.js'
 
 const load = () => {
     return (

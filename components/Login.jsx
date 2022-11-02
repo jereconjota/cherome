@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { Alert } from "./Alert";
-import { onGetUsers, saveUser } from "../utils/firebase";
 
 export default function Login() {
     const [user, setUser] = useState({
@@ -21,23 +19,13 @@ export default function Login() {
         setError("");
         try {
             const loggedUser = await login(user.email, user.password);
-            router.push("/students/" + loggedUser.user.uid);
+            router.push('/students/[id]', `/students/${loggedUser.user.uid}`);
         } catch (error) {
             setError(error.message);
         }
     };
 
-    const handleChange = ({ target: { value, name } }) =>
-        setUser({ ...user, [name]: value });
-
-    // const handleGoogleSignin = async () => {
-    //     try {
-    //         await loginWithGoogle();
-    //         router.push("/home");
-    //     } catch (error) {
-    //         setError(error.message);
-    //     }
-    // };
+    const handleChange = ({ target: { value, name } }) => setUser({ ...user, [name]: value });
 
     const handleResetPassword = async (e) => {
         e.preventDefault();
@@ -107,18 +95,6 @@ export default function Login() {
                     </a>
                 </div>
             </form>
-            {/* <button
-                onClick={handleGoogleSignin}
-                className="bg-slate-50 hover:bg-slate-200 text-black  shadow rounded border-2 border-gray-300 py-2 px-4 w-full"
-            >
-                Google login
-            </button>
-            <p className="my-4 text-sm flex justify-between px-3">
-                Don't have an account?
-                <Link href="/register" className="text-blue-700 hover:text-blue-900">
-                    Register
-                </Link>
-            </p> */}
         </div>
     );
 }

@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {
@@ -25,6 +24,8 @@ const firebaseConfig = {
   measurementId: "G-93ZBH1K1FW"
 };
 
+
+// export const app = initializeApp(firebaseConfig);
 let app;
 if (getApps().length === 0) {
   app = initializeApp(firebaseConfig);
@@ -32,16 +33,28 @@ if (getApps().length === 0) {
   app = getApps()[0];
 }
 
-// export const app = initializeApp(firebaseConfig);
-
-
+// auth and firestore
 export const auth = getAuth(app);
 export const db = getFirestore();
 
+//////////////////////////////
+// students collection crud//
+////////////////////////////
 export const getStudents = () => getDocs(collection(db, "students"));
-
 export const onGetStudents = (callback) => onSnapshot(collection(db, "students"), callback);
 
-export const saveStudent = (user) => /** addDoc(collection(db, "students"), user); */ setDoc(doc(db, "students", user.email), user);
+export const saveStudent = (user) =>  /** addDoc(collection(db, "students", user.email), user); 
+                                          doc(db, "students", user.uid).set(user); */  
+                                      setDoc(doc(db, "students", user.uid), user); 
+export const updateStudent = (id, user) => updateDoc(doc(db, "students", id), user);
+export const getStudent = (id) => {
+  console.log('getStudent', id);
+  return getDoc(doc(db, "students", id));
+}
 
-export const getStudent = (email) => getDoc(doc(db, "students", email));
+
+//////////////////////////
+// users collection crud
+////////////////////////
+
+export const saveUser = (user) => setDoc(doc(db, "users", user.uid), user);
