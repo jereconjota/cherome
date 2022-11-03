@@ -18,8 +18,14 @@ export default function Login() {
         e.preventDefault();
         setError("");
         try {
-            const loggedUser = await login(user.email, user.password);
-            router.push('/students/[id]', `/students/${loggedUser.user.uid}`);
+            // if exist 'admin' in the url, login as admin
+            if (router.pathname.includes("admin")) {
+                const admin = await login(user.email, user.password, true);
+                router.push("/admin/[id]", `/admin/${admin.uid}`);
+            } else {
+                const loggedUser = await login(user.email, user.password);
+                router.push('/students/[id]', `/students/${loggedUser.user.uid}`);
+            }
         } catch (error) {
             setError(error.message);
         }
